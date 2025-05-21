@@ -1,0 +1,37 @@
+{
+  "name": "node_express_mongodb_blog",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "app.js",
+    "dev": "nodemon app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/amRadhwen/node_express_mongodb_blog.git"
+  },
+  "author": "amradhwen",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/amRadhwen/node_express_mongodb_blog/issues"
+  },
+  "homepage": "https://github.com/amRadhwen/node_express_mongodb_blog#readme",
+  "dependencies": {
+    "bcrypt": "^6.0.0",
+    "connect-mongo": "^5.1.0",
+    "cookie-parser": "^1.4.7",
+    "dotenv": "^16.5.0",
+    "ejs": "^3.1.10",
+    "express": "^5.1.0",
+    "express-ejs-layouts": "^2.5.1",
+    "express-session": "^1.18.1",
+    "jsonwebtoken": "^9.0.2",
+    "method-override": "^3.0.0",
+    "mongoose": "^8.15.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.10"
+  }
+}
