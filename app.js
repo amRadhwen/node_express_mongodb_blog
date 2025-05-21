@@ -12,7 +12,7 @@ app.use(express.static("public"))
 // Template Engine
 app.use(expressLayouts);
 app.set("layout", "./layouts/main");
-app.set("view-engine", "ejs");
+app.set("view engine", "ejs");
 
 // routes
 app.use("/", require("./server/routes/main"));
