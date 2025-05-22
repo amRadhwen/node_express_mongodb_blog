@@ -6,8 +6,15 @@
 	<title><%= locals.title %></title>
 	<meta name="description" content="<%= locals.description %>" />
 	<link rel="stylesheet" href="css/style.css">
+	<script type="text/javascript" defer src="/js/script.js"></script>
 </head>
 <body>
-	<%- body %>
+	<div class="container">
+		<%- include("../partials/header.ejs") %>
+		<div class="main">
+			<%- body %>
+		</div>
+		<%- include("../partials/footer.ejs") %>
+	</div>
 </body>
 </html>
