@@ -314,16 +314,25 @@ img {
 }
 
 .searchBar input {
+  max-height: 30px;
   margin: 0;
   border: 0;
 }
 
 #searchClose {
   position: absolute;
-  top: 0;
-  right: 0;
+  top: 4px;
+  right: 10px;
+  width: 15px;
+  height: 15px;
+  text-align:center;
   color: var(--gray-light);
-  padding: 15px;
+  padding: 5px;
+  line-height: 15px;
+  font-weight: bolder;
+  border: 2px solid var(--gray-light);
+  border-radius: 100%;
+  cursor: pointer;
 }
 
 

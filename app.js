@@ -10,6 +10,9 @@ const PORT = 5000 || process.env.PORT;
 // connect to database
 connectDB();
 
+// express urlencoded (to get request body)
+app.use(express.urlencoded({extended: true}));
+
 // static (stylesheets, images, scripts...etc)
 app.use(express.static("public"))
 
