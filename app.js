@@ -6,6 +6,7 @@ const connectDB = require("./server/config/db");
 const cookieParser = require("cookie-parser");
 const mongoStore = require("connect-mongo");
 const session = require("express-session");
+const isActiveRoute = require("./server/helpers/routeHelpers");
 
 const app = express();
 const PORT = 5000 || process.env.PORT;
@@ -34,6 +35,9 @@ app.use(express.static("public"))
 app.use(expressLayouts);
 app.set("layout", "./layouts/main");
 app.set("view engine", "ejs");
+
+// locals
+app.locals.isActiveRoute = isActiveRoute;
 
 // routes
 app.use("/", require("./server/routes/main"));
