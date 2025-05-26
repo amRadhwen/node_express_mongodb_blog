@@ -1,6 +1,7 @@
 require ("dotenv").config();
 const express = require("express");
 const expressLayouts = require("express-ejs-layouts");
+const methodOverride = require("method-override");
 const connectDB = require("./server/config/db");
 const cookieParser = require("cookie-parser");
 const mongoStore = require("connect-mongo");
@@ -23,7 +24,8 @@ app.use(session({
 	store: mongoStore.create({
 		mongoUrl: process.env.MONGODB_URI
 	})
-}))
+}));
+app.use(methodOverride("_method"));
 
 // static (stylesheets, images, scripts...etc)
 app.use(express.static("public"))

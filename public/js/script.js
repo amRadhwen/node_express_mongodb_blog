@@ -20,5 +20,13 @@ document.addEventListener("DOMContentLoaded", function(){
 		searchButton.setAttribute("aria-expanded", "false");
 	})
 
+	const adminDeletePostBtn = document.getElementById("delete-post-btn");
+	adminDeletePostBtn.addEventListener("click", function(e){
+		const response = confirm("Are you shure?");
+		if(!reponse) {
+			e.preventDefault();
+		}
+	})
+
 
 })

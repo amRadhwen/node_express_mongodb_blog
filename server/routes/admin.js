@@ -39,7 +39,7 @@ router.get("/admin", async(req, res)=>{
 			description: "Simple Blog created with NodeJs, Express & MongoDB."
 		}
 
-		res.render("admin/index", {locals, layout: adminLayout});
+		res.render("admin/index", {locals/*, layout: adminLayout*/});
 	}
 	catch(err){
 		console.log(err);
@@ -126,12 +126,73 @@ router.post("/add-post", authMiddleware, async (req, res)=>{
 		const newPost = new Post({title, body})
 
 		await Post.create(newPost);
-		res.redirect("/dashboard"); 
+		res.redirect("/dashboard"); mongo
 
 	} catch(e) {
 		console.log(e);
 	}
 });
+
+/**
+ * GET /
+ * Admin - Edit post interface
+ * */
+
+router.get("/edit-post/:id", authMiddleware, async (req, res)=>{
+	try {
+		const locals = {
+			title: "Edit Post",
+			"description": "Simple Blog created with NodeJs, Express & MongoDB."
+		}
+		const id = req.params.id;
+		const post = await Post.findOne({_id: id});
+		res.render("admin/edit-post", {locals, post, layout: adminLayout})
+	} catch(e) {
+		console.log(e);
+	}
+})
+
+/**
+ * PUT /
+ * Admin - Edit post
+ * */
+
+router.put("/edit-post/:id", authMiddleware, async (req, res)=>{
+	try {
+		const post = await Post.findByIdAndUpdate(req.params.id, {
+			title: req.body.title,
+			body: req.body.body
+		});
+		res.redirect(`/edit-post/${req.params.id}`);
+	} catch(e) {
+		console.log(e);
+	}
+})
+
+/**
+ * DELETE /
+ * Admin - Delete Post
+ * */
+
+router.delete("/delete-post/:id", authMiddleware, async(req, res)=>{
+	try {
+		await Post.deleteOne({_id: req.params.id});
+		res.redirect("/dashboard");
+	} catch(e) {
+		console.log(e);
+	}
+})
+
+/**
+ * GET /
+ * Admin - Signout
+ * */
+
+router.get("/signout", authMiddleware, (req, res)=>{
+	res.clearCookie("acctoken");
+	//res.json({message: "Signout success :)"});
+	res.redirect("/admin")
+})
 
 /*
 router.post("/admin", (req, res)=>{
