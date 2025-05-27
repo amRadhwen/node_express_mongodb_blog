@@ -1,6 +1,9 @@
 const { Router } = require("express");
 const router = Router();
 const Post = require("../models/Post");
+const User = require("../models/User");
+const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
 
 // Routes
 /**
@@ -34,6 +37,60 @@ router.get("/", async (req, res)=>{
 			currentRoute: "/"
 		});
 	} catch(e) {
+		console.log(e);
+	}
+})
+
+/**
+ * GET /
+ * Signin
+ * */
+
+router.get("/signin", (req, res)=>{
+	const locals = {
+		title: "Signin",
+		description: "amRadhwen blog developped in NodeJs, ExpressJs and MongoDB."
+	}
+	res.render("signin", {locals, currentRoute: "/signin"});
+})
+
+/**
+ * GET /
+ * Signup
+ * */
+
+router.get("/signup", (req, res)=>{
+	const locals = {
+		title: "Signup",
+		description: "amRadhwen blog developped in NodeJs, ExpressJs and MongoDB."
+	}
+	res.render("signup", {locals, currentRoute: "/signup"});
+})
+
+/**
+ * POST /
+ * Signup
+ * */
+
+router.post("/signup", async (req, res)=> {
+	try {
+		const {username, password} = req.body;
+		const hpassword = await bcrypt.hash(password, 10);
+		console.log(req.body, hpassword);
+		try {
+			const user = await User.create({username, password: hpassword});
+			//res.status(201).json({success: true, message: "User creation success"});
+			res.redirect("/signin");
+		} catch(e) {
+			if(e.code === 11000) {
+				res.status(409).json({message: "User already in use"});
+			}
+			res.status(500).json({message: "Internal Server Error"});
+			console.log(e);
+		}
+
+	} catch(e) {
+		// statements
 		console.log(e);
 	}
 })
@@ -92,7 +149,7 @@ router.post("/search", async (req, res)=>{
 				{body: {$regex: new RegExp(searchNoSpeacialChar, 'i')}}
 			]
 		});
-		res.render("search", {locals, data});
+		res.render("search", {locals, data, currentRoute: "/"});
 	} catch(e) {
 		console.log(e);
 	}

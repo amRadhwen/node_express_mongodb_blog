@@ -39,7 +39,7 @@ router.get("/admin", async(req, res)=>{
 			description: "Simple Blog created with NodeJs, Express & MongoDB."
 		}
 
-		res.render("admin/index", {locals/*, layout: adminLayout*/});
+		res.render("admin/index", {locals/*, layout: adminLayout*/, currentRoute: "/admin"});
 	}
 	catch(err){
 		console.log(err);
@@ -86,6 +86,7 @@ router.get("/dashboard", authMiddleware, async (req, res)=>{
 		res.render("admin/dashboard", {
 			locals,
 			data,
+			currentRoute: "/dashboard",
 			layout: adminLayout
 		});	
 	} catch(e) {
@@ -108,6 +109,7 @@ router.get("/add-post", authMiddleware, async (req, res)=>{
 		res.render("admin/add-post", {
 			locals,
 			data,
+			currentRoute: "/add-post",
 			layout: adminLayout
 		});	
 	} catch(e) {
@@ -146,7 +148,7 @@ router.get("/edit-post/:id", authMiddleware, async (req, res)=>{
 		}
 		const id = req.params.id;
 		const post = await Post.findOne({_id: id});
-		res.render("admin/edit-post", {locals, post, layout: adminLayout})
+		res.render("admin/edit-post", {locals, post, layout: adminLayout, currentRoute: "/edit-post",})
 	} catch(e) {
 		console.log(e);
 	}

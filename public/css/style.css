@@ -56,6 +56,18 @@ textarea {
   background-color: var(--red);
 }
 
+.btn-signout {
+  border-radius: 10px;
+  padding: 5px 10px;
+  background-color: inherit;
+  border: 2px solid var(--black);
+  color: var(--black);
+}
+
+.btn-signout:hover {
+  background-color: var(--black);
+  color: var(--gray-light);
+}
 
 img {
   width: 100%;
